@@ -6,6 +6,8 @@ import {
   FormHelperText,
   TextareaAutosize,
   TextField,
+  Chip,
+  Stack
 } from "@mui/material";
 import CustomButton from "./CustomButton";
 import "./AddEmployee.css";
@@ -18,7 +20,8 @@ const AddEmployee = () => {
   const [isUploaded, setIsUploaded] = useState(false);
   const [file, setFile] = useState([]);
   const [skills, setSkills] = useState({});
-
+  const [primarySkills, setPrimarySkills] = useState([]);
+  const [secondarySkills, setSecondarySkills] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const handleSubmit = (e) => {
@@ -60,8 +63,10 @@ const AddEmployee = () => {
  
 
   const fetchSkillsFromResume = async(fileFormdata) => {
-    axios.post("http://localhost:5000/get-resume-skills", fileFormdata, {headers: { 'content-type': 'multipart/form-data' }}).then((res) => {
+    axios.post("http://localhost:8000/get-resume-skills", fileFormdata, {headers: { 'content-type': 'multipart/form-data' }}).then((res) => {
         console.log(res.data);
+        setPrimarySkills(res.data.primary_skills)
+        setSecondarySkills(res.data.secondary_skills)
         // setSkills(res.data);
     }).catch((err) => {
         // alert(err);
@@ -366,11 +371,53 @@ const AddEmployee = () => {
                     const reader = new FileReader();
 
                     reader.readAsText(Array.from(event.target.files)[0]);
+                    console.log({event:event.target.files[0]})
+                    let formData = new FormData();
+                    formData.set("file",event.target.files)
+                  //   axios.post("http://localhost:8000/get-resume-skills", formData, {headers: { 'content-type': 'multipart/form-data' }}).then((res) => {
+                  //     console.log(res.data.primary_skills);
+
+                  //     // setSkills(res.data);
+                  // }).catch((err) => {
+                  //     // alert(err);
+                  //     console.log(err);
+                  // })
                   }}
                 />
               </label>
             </FormControl>
+            <FormControl>
+            <FormHelperText
+                sx={{
+                  fontWeight: 500,
+                  margin: "10px 0",
+                  fontSize: 16,
+                  color: "#342E39",
+                }}
+              >
+                Primary Skills <span className="required">*</span>
+              </FormHelperText>
+              <Stack direction="row" spacing={1}>
+  {primarySkills.map((skill)=><Chip label={skill} color="primary" />)}
+</Stack>
 
+            </FormControl>
+            <FormControl>
+            <FormHelperText
+                sx={{
+                  fontWeight: 500,
+                  margin: "10px 0",
+                  fontSize: 16,
+                  color: "#342E39",
+                }}
+              >
+                Secondary Skills <span className="required">*</span>
+              </FormHelperText>
+              <Stack direction="row" spacing={1}>
+  {secondarySkills.map((skill)=><Chip label={skill} color="success" />)}
+</Stack>
+
+            </FormControl>
             <CustomButton
               fullWidth
               type="submit"

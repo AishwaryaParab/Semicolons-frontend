@@ -47,17 +47,13 @@ const EmployeeTable = ( props ) => {
   useEffect(() => {
 setEmployeeLoading(true);
     axios
-      .post(`http://localhost:5000/rank-employees`,
-        {
-          jobDescription:"react"
-        }
-      ,) 
+      .post(`http://localhost:5000/${jdId}/rank-employees`) 
       .then((response) => {
         const data = response.data;
         console.log(data);
 
-        setPeople(data.employee);
-        setPages(data.page.noOfPages);
+        setPeople(data);
+        // setPages(data.page.noOfPages);
         setEmployeeLoading(false);
 
       })
@@ -79,7 +75,7 @@ setEmployeeLoading(true);
         pageSize={20}
         rowsPerPageOptions={[20]}
         checkboxSelection
-        getRowId={(row) => row._id}
+        getRowId={(row) => row.empId}
       />
       </div>
       {/* </Box> */}
