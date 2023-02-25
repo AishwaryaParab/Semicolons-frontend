@@ -14,37 +14,38 @@ import { useReducer } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
-const initialState = {
-    empId: 0,
-    name: "",
-    email: "",
-    grade: 0,
-    jobTitle: "",
-    location: "",
-    bu: "",
-    contactNumber: 0,
-    linkedin: "",
-    github: "",
-    skills: {
-        primarySkills: [],
-        secondarySkills: [],
-        othSkills: [],
-    }
-}
-
-
 const AddEmployee = () => {
   const [isUploaded, setIsUploaded] = useState(false);
   const [file, setFile] = useState([]);
+  const [skills, setSkills] = useState({});
+
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const employeeObj = {
+    const employeeObj = {
+        empId: e.target.empId.value,
+        name: e.target.name.value,
+        email: e.target.email.value,
+        grade: e.target.grade.value,
+        jobTitle: e.target.jobTitle.value,
+        location: e.target.location.value,
+        bu: e.target.bu.value,
+        contactNo: e.target.contactNo.value,
+        linkedin: e.target.linkedin.value,
+        github: e.target.github.value,
+        // skills: 
 
-    // }
-    console.log(e.target.empId.value);
-    console.log(file);
+    }
+    // console.log(e.target.empId.value);
+    // console.log(file);
+
+    axios.post("http://localhost:5000/employees", employeeObj).then((res) => {
+        console.log(res.data);
+    }).catch((err) => {
+        console.log(err);
+    })
   };
 
   useEffect(() => {
@@ -61,6 +62,7 @@ const AddEmployee = () => {
   const fetchSkillsFromResume = async(fileFormdata) => {
     axios.post("http://localhost:5000/get-resume-skills", fileFormdata, {headers: { 'content-type': 'multipart/form-data' }}).then((res) => {
         console.log(res.data);
+        // setSkills(res.data);
     }).catch((err) => {
         // alert(err);
         console.log(err);
@@ -134,6 +136,7 @@ const AddEmployee = () => {
               </FormHelperText>
               <TextField
                 fullWidth
+                name="name"
                 required
                 placeholder="Name"
                 id="outlined-basic"
@@ -157,6 +160,7 @@ const AddEmployee = () => {
               <TextField
                 fullWidth
                 required
+                name="email"
                 type="email"
                 placeholder="Email"
                 id="outlined-basic"
@@ -180,6 +184,7 @@ const AddEmployee = () => {
               <TextField
                 fullWidth
                 type="number"
+                name="grade"
                 placeholder="Grade"
                 id="outlined-basic"
                 color="warning"
@@ -202,6 +207,7 @@ const AddEmployee = () => {
               <TextField
                 fullWidth
                 required
+                name="jobTitle"
                 placeholder="Job Title"
                 id="outlined-basic"
                 color="warning"
@@ -224,6 +230,7 @@ const AddEmployee = () => {
               <TextField
                 fullWidth
                 required
+                name="location"
                 placeholder="Location"
                 id="outlined-basic"
                 color="warning"
@@ -246,6 +253,7 @@ const AddEmployee = () => {
               <TextField
                 fullWidth
                 required
+                name="bu"
                 placeholder="BU"
                 id="outlined-basic"
                 color="warning"
@@ -269,6 +277,7 @@ const AddEmployee = () => {
                 fullWidth
                 required
                 type="number"
+                name="contactNo"
                 placeholder="Contact Number"
                 id="outlined-basic"
                 color="warning"
@@ -292,6 +301,7 @@ const AddEmployee = () => {
                 fullWidth
                 placeholder="LinkedIn URL"
                 id="outlined-basic"
+                name="linkedin"
                 color="warning"
                 variant="outlined"
                 //   onChange={(e) => {setAssignee(e.target.value)}}
@@ -313,6 +323,7 @@ const AddEmployee = () => {
                 fullWidth
                 placeholder="GitHub URL"
                 id="outlined-basic"
+                name="github"
                 color="warning"
                 variant="outlined"
                 //   onChange={(e) => {setAssignee(e.target.value)}}
@@ -363,7 +374,7 @@ const AddEmployee = () => {
             <CustomButton
               fullWidth
               type="submit"
-              title="Add JD"
+              title="Submit"
               backgroundColor="#F5AE45"
               color="#fcfcfc"
             />

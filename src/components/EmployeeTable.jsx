@@ -47,7 +47,11 @@ const EmployeeTable = ( props ) => {
   useEffect(() => {
 setEmployeeLoading(true);
     axios
-      .get(`http://localhost:5000/employees?page=${page}&limit=${limit}`) 
+      .post(`http://localhost:5000/rank-employees`,
+        {
+          jobDescription:"react"
+        }
+      ,) 
       .then((response) => {
         const data = response.data;
         console.log(data);
