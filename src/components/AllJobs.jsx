@@ -1,17 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Box, Typography } from '@mui/material';
-import {job} from "../data/job";
+import axios from "axios";
+// import {job} from "../data/job";
 import JobCard from './JobCard';
 import CustomButton from './CustomButton';
 import { Add } from "@mui/icons-material";
 import { useNavigate } from 'react-router-dom';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 
 const AllJobs = () => {
   const navigate = useNavigate();
+  const [job, setJob] = useState([]);
 
   const handleJob = () => {
     navigate("/create-jd")
   }
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/all-job-descriptions").then((res) => {
+      // console.log(res.data);
+      setJob(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
 
   return (
     <Box
@@ -31,7 +43,7 @@ const AllJobs = () => {
 
     <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 4, alignItems: "center", justifyContent: "center"}}>
         {job.map((item) => {
-            return <JobCard key={item._id} id={item._id} job_desc={item.job_desc} assignedBy={item.assignedBy} />
+            return <JobCard key={item._id} title={item.job_title} id={item._id} job_desc={item.job_desc} assignedBy={item.assignedBy} />
         })}
     </Box>
   </Box>
