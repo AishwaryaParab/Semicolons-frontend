@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import CustomButton from './CustomButton';
-
+import EmployeeTable from './EmployeeTable';
 const Job = () => {
   const {state} = useLocation();
+  const [showMatchingEmp, setSshowMatchingEmp] = useState(false);
+  const handleJob = () =>{
+ setSshowMatchingEmp(true)
+  }
 
   return (
     <Box
@@ -23,9 +27,10 @@ const Job = () => {
             title="Match Employees"
             backgroundColor="#F5AE45"
             color="#fcfcfc"
-            // handleClick={handleJob}
+            handleClick={handleJob}
         />
     </Box>
+    {showMatchingEmp?<EmployeeTable jdId={state.id}/>:null} 
   </Box>
   )
 }
