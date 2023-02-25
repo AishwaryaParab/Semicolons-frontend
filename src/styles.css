@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif !important;
+}
+
+.logo {
+    width: 180px;
+    height: 50px;
+    /* padding-top: 5px; */
+    padding-top: 8px;
+}
+
+.required {
+    color: red;
+}
+
+.read-more {
+    color: #F5AE45;
+    text-decoration: none;
+}
+

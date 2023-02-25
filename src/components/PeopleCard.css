@@ -1,0 +1,90 @@
+.people-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    margin: 10px 20px;
+    padding: 20px 30px;
+    flex-wrap: wrap;
+    /* flex: 33.33%; */
+    width: 20rem;
+    border-radius: 0.3vw;
+    line-height: 1;
+    position: relative;
+    font-family: 'Manrope', sans-serif;
+    background-color: #FCFCFC;
+}
+
+.people-card-avatar{
+    width: 50px;
+    height: 50px;
+    margin: 15px 0;
+    margin-bottom: 35px;
+    border-radius: 100%;
+    background-color: #F5AE45;
+    color: white;
+    font-weight: 800;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.people-card-name{
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.people-card-email{
+    font-size: 0.9rem;
+    color: grey;
+    margin-top: 10px;
+}
+
+.people-card-emp-id{
+    position: absolute;
+    /* top: 10px;
+    right: 25px; */
+    top: 0;
+    right: 0;
+    background-color: #F5AE45;
+    padding: 5px 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.people-card-bu{
+    background-color: purple;
+    padding: 5px 10px;
+    border-radius: 40px;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.people-card-job-title {
+    margin-top: 10px;
+}
+
+/* pagination */
+.active {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+}
+
+.inactive {
+    color: black;
+    cursor: pointer;
+}
