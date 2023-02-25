@@ -77,7 +77,7 @@ const CreateJob = () => {
         sx={{
           padding: "2px 30px 30px 30px",
           boxShadow:
-            "rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;",
+            "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
         }}
       >
         <form

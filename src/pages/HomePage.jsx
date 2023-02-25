@@ -37,7 +37,7 @@ const HomePage = () => {
     <div>
       <Box sx={{ display: "flex" }}>
           <Sidenav /> 
-          <Box bgcolor="#F4F4F4" component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
             <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/jobs" element={<AllJobs />} />

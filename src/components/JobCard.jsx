@@ -11,6 +11,7 @@ const JobCard = ({id, title, job_desc, assignedBy}) => {
     <Card 
       sx={{
         maxWidth: "330px",
+        height: "320px",
         padding: "10px",
         '&:hover': {
             boxShadow: "rgba(0, 0, 0, 0.1) 0px 10px 50px",
