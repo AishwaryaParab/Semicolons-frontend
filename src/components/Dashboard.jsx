@@ -13,7 +13,7 @@ import axios from "axios";
 const TotalRevenueSeries = [
   {
     name: "Last Month",
-    data: [183, 124, 115, 85, 0, 0, 0],
+    data: [85, 124, 115, 183, 0, 0, 0],
   },
 ];
 

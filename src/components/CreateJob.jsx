@@ -104,6 +104,7 @@ const CreateJob = () => {
             <TextField
               fullWidth
               required
+              autoComplete="new-password"
               placeholder="Job Title"
               id="outlined-basic"
               color="warning"
