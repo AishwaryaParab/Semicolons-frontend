@@ -1,63 +1,165 @@
-import React, {useState} from 'react';
-import { FormControl, TextField, FormHelperText, Box, Typography } from '@mui/material';
-import CustomButton from '../components/CustomButton';
-import { Login } from '@mui/icons-material';
+import React, { useState } from "react";
+
+import {
+  FormControl,
+  TextField,
+  FormHelperText,
+  Box,
+  Typography,
+} from "@mui/material";
+
+import CustomButton from "../components/CustomButton";
+
+import { Login } from "@mui/icons-material";
+
 import axios from "axios";
-import { useEffect } from 'react';
-import Cookies from "universal-cookie"
-import { useNavigate } from 'react-router-dom';
+
+import { useEffect } from "react";
+
+import Cookies from "universal-cookie";
+
+import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [user, setUser] = useState({});
 
   const navigate = useNavigate();
 
   const cookies = new Cookies();
 
+  const notify = (msg, event) => {
+    if (event === "error") {
+      return toast.error(msg, {
+        position: "top-right",
+
+        autoClose: 2000,
+
+        hideProgressBar: false,
+
+        closeOnClick: true,
+
+        pauseOnHover: true,
+
+        draggable: true,
+
+        progress: undefined,
+
+        theme: "colored",
+      });
+    } else {
+      toast.success(msg, {
+        position: "top-right",
+
+        autoClose: 2000,
+
+        hideProgressBar: false,
+
+        closeOnClick: true,
+
+        pauseOnHover: true,
+
+        draggable: true,
+
+        progress: undefined,
+
+        theme: "colored",
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/users/login", {email, password}).then((response) => {
+    axios
 
-      cookies.set("token", JSON.stringify(response.data.token), {
-        path: "/",
-        maxAge: 3600, // Cookie expires after 1hr 5secs
-      });
-      cookies.set("user", JSON.stringify(response.data.user), {
-        path: "/",
-        maxAge: 3600, // Cookie expires after 1hr 5secs
-      });
+      .post("http://localhost:5000/users/login", { email, password })
 
-      navigate("/");
-    }).catch((err) => {
-      alert("Invalid Username and Password");
-      console.log(err);
-    })
-  }
+      .then((response) => {
+        notify("Login Successful", "success");
+
+        cookies.set("token", JSON.stringify(response.data.token), {
+          path: "/",
+
+          maxAge: 3600, // Cookie expires after 1hr 5secs
+        });
+
+        cookies.set("user", JSON.stringify(response.data.user), {
+          path: "/",
+
+          maxAge: 3600, // Cookie expires after 1hr 5secs
+        });
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2500);
+      })
+
+      .catch((err) => {
+        notify("Invalid Username and Password", "error");
+
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     const token = cookies.get("token");
 
-    if(token) {
+    if (token) {
       return navigate("/");
     }
-  }, [])
+  }, []);
 
   return (
-    <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#342E39"}}>
-      <Box borderRadius="15px" width="50%" padding="30px" bgcolor="white">
-        <h1 style={{color: "#342E39"}}>Login</h1>
-        <div style={{width:"70px", height:"5px", backgroundColor: "#F5AE45", marginTop: "10px", borderRadius: "4px"}}></div>
+    <Box
+      sx={{
+        display: "flex",
 
+        justifyContent: "center",
+
+        alignItems: "center",
+
+        height: "100vh",
+
+        backgroundColor: "#342E39",
+      }}
+    >
+      <ToastContainer />
+
+      <Box borderRadius="15px" width="50%" padding="30px" bgcolor="white">
+        <h1 style={{ color: "#342E39" }}>Login</h1>
+
+        <div
+          style={{
+            width: "70px",
+
+            height: "5px",
+
+            backgroundColor: "#F5AE45",
+
+            marginTop: "10px",
+
+            borderRadius: "4px",
+          }}
+        ></div>
 
         <form
           style={{
             marginTop: "20px",
+
             width: "100%",
+
             display: "flex",
+
             flexDirection: "column",
+
             gap: "20px",
           }}
           onSubmit={(e) => handleSubmit(e)}
@@ -66,12 +168,15 @@ const LoginPage = () => {
             <FormHelperText
               sx={{
                 fontWeight: 500,
+
                 margin: "10px 0",
+
                 fontSize: 16,
+
                 color: "#342E39",
               }}
             >
-              Email address  <span className="required">*</span>
+              Email address <span className="required">*</span>
             </FormHelperText>
 
             <TextField
@@ -82,7 +187,9 @@ const LoginPage = () => {
               id="outlined-basic"
               color="warning"
               variant="outlined"
-              onChange={(e) => {setEmail(e.target.value)}}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </FormControl>
 
@@ -90,12 +197,15 @@ const LoginPage = () => {
             <FormHelperText
               sx={{
                 fontWeight: 500,
+
                 margin: "10px 0",
+
                 fontSize: 16,
+
                 color: "#342E39",
               }}
             >
-              Password  <span className="required">*</span>
+              Password <span className="required">*</span>
             </FormHelperText>
 
             <TextField
@@ -107,12 +217,11 @@ const LoginPage = () => {
               id="outlined-basic"
               color="warning"
               variant="outlined"
-              onChange={(e) => {setPassword(e.target.value)}}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </FormControl>
-
-          
-        
 
           <CustomButton
             icon={<Login />}
@@ -125,7 +234,7 @@ const LoginPage = () => {
         </form>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

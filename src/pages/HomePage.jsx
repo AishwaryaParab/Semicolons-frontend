@@ -11,6 +11,9 @@ import { useEffect } from 'react';
 import Cookies from "universal-cookie";
 import CreateJob from '../components/CreateJob';
 import Job from '../components/Job';
+import EmployeeDetails from '../components/EmployeeDetails';
+import { EditRounded } from '@mui/icons-material';
+import UpdateEmployee from '../components/UpdateEmployee';
 
 
 const HomePage = () => {
@@ -46,6 +49,8 @@ const HomePage = () => {
               <Route path="/create-jd" element={<CreateJob />} />
               <Route path="/jobs/:id" element={<Job />} />
               <Route path="/add" element={<AddEmployee />} />
+              <Route path="/:id/details" element={<EmployeeDetails />} />
+              <Route path="/:id/editDetails" element={<UpdateEmployee />} />
             </Routes>
           </Box>
         </Box>  

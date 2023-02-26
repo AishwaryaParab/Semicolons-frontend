@@ -13,17 +13,19 @@
     position: relative;
     font-family: 'Manrope', sans-serif;
     background-color: #FCFCFC;
+    cursor: pointer;
 }
 
 .people-card-avatar{
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     margin: 15px 0;
     margin-bottom: 35px;
     border-radius: 100%;
     background-color: #F5AE45;
     color: white;
     font-weight: 800;
+    font-size: 20px;
     text-align: center;
     display: flex;
     align-items: center;
