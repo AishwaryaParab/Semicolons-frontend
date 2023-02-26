@@ -73,26 +73,27 @@ const Dashboard = () => {
   const [bu, setBu] = useState("");
   const [domain, setDomain] = useState({});
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:5000/users/me", {
-  //       headers: { Authorization: "Bearer " + token },
-  //     })
-  //     .then((res) => {
-  //       setBu(res.data.BU);
-  //       axios
-  //         .get(`http://localhost:5000/employee/get-tech-domain?BU=${bu}`)
-  //         .then((res) => {
-  //           setDomain(res.data);
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users/me", {
+        headers: { Authorization: "Bearer " + token },
+      })
+      .then((res) => {
+        setBu(res.data.BU);
+        axios
+          .get(`http://localhost:5000/employee/get-tech-domain?BU=${bu}`)
+          .then((res) => {
+            setDomain(res.data);
+            console.log(res.data)
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Box mt={7}>
@@ -105,18 +106,18 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="flex-start"
           flexWrap="wrap"
-          gap={2}
+          gap={3}
         >
           <PieChart
             title="UI Angular Resources"
-            value={562}
+            value={276}
             series={[50, 50]}
             colors={["#275BE8", "#c4E8EF"]}
           />
 
           <PieChart
             title="UI React Resources"
-            value={234}
+            value={296}
             series={[53, 47]}
             colors={["#275BE8", "#c4E8EF"]}
           />
@@ -131,48 +132,48 @@ const Dashboard = () => {
           <PieChart
             title="Java Fullstack Resources"
             value={252}
-            series={[46, ]}
+            series={[46, 54]}
             colors={["#275BE8", "#c4E8EF"]}
           />
 
           <PieChart
             title="DevOps Resources"
             value={188}
-            series={[75, 25]}
+            series={[34, 66]}
             colors={["#275BE8", "#c4E8EF"]}
           />
 
           <PieChart
             title="Cloud Resources"
             value={132}
-            series={[75, 25]}
+            series={[24, 76]}
             colors={["#275BE8", "#c4E8EF"]}
           />
 
           <PieChart
             title=".NET Resources"
             value={131}
-            series={[75, 25]}
+            series={[24, 76]}
             colors={["#275BE8", "#c4E8EF"]}
           />
         </Box>
 
-        <Stack mt="25px" width="100%" direction={{ xs: "column", lg: "row" }}>
+        <Stack mt={7} width="100%" direction={{ xs: "column", lg: "row" }}>
           <Box
             display="flex"
             flexDirection="column"
             flex={1}
-            p={4}
+            // p={4}
             bgcolor="#fcfcfc"
             borderRadius="15px"
           >
-            <Typography fontSize={18} fontWeight={600} color="#11142d">
-              Total Allocations
-            </Typography>
+             <Typography fontSize={25} fontWeight={700} color="#11142D">
+          Total Allocations
+        </Typography>
 
             <Stack my="20px" direction="row" gap={4} flexWrap="wrap">
-              <Typography fontSize={28} fontWeight={700} color="#11142d">
-                535
+              <Typography fontSize={20} fontWeight={700} color="#11142d">
+                535 Allocations
               </Typography>
               {/* 
         <Stack direction='row' alignItems="center" gap={1}>
@@ -232,7 +233,7 @@ const Dashboard = () => {
             }}
           >
             <Stack direction="column" gap={0.5} alignItems="flex-start">
-              <Typography fontSize={20} fontWeight={500} color="#342E39">
+              <Typography fontSize={20} fontWeight={400} color="#342E39">
                 Software AG Professionals
               </Typography>
               <div
@@ -293,7 +294,7 @@ const Dashboard = () => {
             }}
           >
             <Stack direction="column" gap={0.5} alignItems="flex-start">
-              <Typography fontSize={20} fontWeight={500} color="#342E39">
+              <Typography fontSize={20} fontWeight={400} color="#342E39">
                 AWS Cloud Professionals
               </Typography>
               <div
@@ -354,7 +355,7 @@ const Dashboard = () => {
             }}
           >
             <Stack direction="column" gap={0.5} alignItems="flex-start">
-              <Typography fontSize={20} fontWeight={500} color="#342E39">
+              <Typography fontSize={20} fontWeight={400} color="#342E39">
                 Azure Cloud Professionals
               </Typography>
               <div
@@ -390,38 +391,7 @@ const Dashboard = () => {
         </Card>
       </Box>
 
-      <Box>
-        <Typography fontSize={25} fontWeight={700} color="#11142D" mt={4}>
-          Openings
-        </Typography>
-
-        <Card
-          sx={{
-            maxWidth: "330px",
-            height: "250px",
-            marginTop: "20px",
-            padding: "10px",
-            "&:hover": {
-              boxShadow: "rgba(0, 0, 0, 0.1) 0px 10px 50px",
-            },
-            cursor: "pointer",
-            textDecoration: "none",
-            // border: "2px solid black",
-            borderRadius: "12px",
-            boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
-          }}
-          elevation={0}
-
-          // onClick={() => {navigate(`/jobs/${id}`, {state: {id, title, job_desc, assignedBy}})}}
-        >
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          ></CardContent>
-        </Card>
-      </Box>
+      
     </Box>
   );
 };

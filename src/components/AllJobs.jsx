@@ -43,7 +43,7 @@ const AllJobs = () => {
 
     <Box mt="20px" sx={{ display: "flex", flexWrap: "wrap", gap: 4, alignItems: "center", justifyContent: "center"}}>
         {job.map((item) => {
-            return <JobCard key={item._id} title={item.title} id={item._id} job_desc={item.content} assignedBy={item.assignedBy} />
+            return <JobCard key={item._id} title={item.title} id={item._id} job_desc={item.content} assignedBy={item.assignee} />
         })}
     </Box>
   </Box>

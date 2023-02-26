@@ -32,7 +32,7 @@ const JobCard = ({id, title, job_desc, assignedBy}) => {
         }}>
         <Stack direction="column" gap={0.5} alignItems="flex-start">
             <Typography fontSize={20} fontWeight={500} color="#342E39">{title}</Typography>
-            <Typography fontSize={12} fontWeight={400} color="#342E39">#{id}</Typography>
+            <Typography fontSize={12} fontWeight={400} color="#c7c6c6">#{id}</Typography>
             <Typography mt={2} fontSize={14} color="#808191">{job_desc.substring(1, 200)} <p className="read-more">...Read More</p></Typography>
             <Typography mt={2} fontSize={12} fontWeight={600} color="#F5AE45">Requested By: {assignedBy}</Typography>
         </Stack>        

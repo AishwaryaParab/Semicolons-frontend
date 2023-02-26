@@ -18,7 +18,7 @@ const PieChart = ({title, value, series, colors}) => {
       gap={2}
       borderRadius="15px"
       minHeight="110px"
-      width="fit-content"
+      width="350px"
       sx={{boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;"}}
     >
       <Stack direction="column">
