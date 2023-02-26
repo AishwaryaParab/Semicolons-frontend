@@ -15,8 +15,11 @@ import upload from "../images/upload.png";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import {Link, useNavigate} from "react-router-dom"
 
 const AddEmployee = () => {
+
+  const navigate = useNavigate();
   const [isUploaded, setIsUploaded] = useState(false);
   const [file, setFile] = useState([]);
   const [skills, setSkills] = useState({});
@@ -34,11 +37,28 @@ const AddEmployee = () => {
         grade: e.target.grade.value,
         jobTitle: e.target.jobTitle.value,
         location: e.target.location.value,
-        bu: e.target.bu.value,
+        BU: e.target.bu.value,
         contactNo: e.target.contactNo.value,
         linkedin: e.target.linkedin.value,
         github: e.target.github.value,
-        // skills: 
+        experience: 5,
+        billed: "YES",
+        bufferTime: 2,
+        status: {
+          available: true,
+          inProgress: null,
+          allocated: null,
+          billed:null
+      },
+      skills: {
+          primarySkills: primarySkills,
+          secondarySkills: secondarySkills,
+          otherSkills: [
+            "InVision",
+            "Figma",
+            "Karma"
+        ],
+        }
 
     }
     // console.log(e.target.empId.value);
@@ -46,6 +66,7 @@ const AddEmployee = () => {
 
     axios.post("http://localhost:5000/employees", employeeObj).then((res) => {
         console.log(res.data);
+        navigate("/people");
     }).catch((err) => {
         console.log(err);
     })
